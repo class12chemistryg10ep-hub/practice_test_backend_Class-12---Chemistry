@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Class 12 Practice Test</title>
+  <title>Class-12-Practice Test</title>
   <style>
     body {
       font-family: sans-serif;
@@ -142,7 +142,7 @@
 
 <body>
   <div id="loginContainer">
-    <h2>Login to class 12 Practice Test</h2>
+    <h2>Login to Class-9 Practice Test</h2>
     <input type="email" id="emailInput" placeholder="Enter your email" required />
     <button onclick="login()">Login</button>
   </div>
@@ -163,9 +163,7 @@
       <select id="chapterSelect" disabled>
         <option value="">Select Chapter</option>
       </select>
-    </div>
 
-    <div id="topicRow">
       <label id="topicLabel" for="itemSelect">Topic / Year:</label>
       <select id="itemSelect" disabled>
         <option value="">Select Topic / Year</option>
@@ -230,9 +228,8 @@
       }
     }, 5000);
 
-    // === Fixed Catalog JSON with unique keys ===
-   // === Fixed Catalog JSON with unique keys ===
-const catalog = {
+    // Catalog JSON
+   const catalog = {
   "Topic wise mcq (basic)": {
   "Chapter 1 - Solution ": {
               "1. Types of Solutions": "https://chemistry-g10ep.github.io/Board-12-E-HTML-Solution/1. Types of Solutions.html",
@@ -425,8 +422,6 @@ const catalog = {
   }
 };
 
-
-
     const levelSelect   = document.getElementById('levelSelect');
     const chapterSelect = document.getElementById('chapterSelect');
     const itemSelect    = document.getElementById('itemSelect');
@@ -434,7 +429,6 @@ const catalog = {
     const viewer        = document.getElementById('viewer');
     const controls      = document.getElementById('controls');
     const headerBar     = document.getElementById('headerBar');
-    const topicRow      = document.getElementById('topicRow');
 
     function resetSelect(selectEl, placeholderText, disable = false) {
       selectEl.innerHTML = `<option value="">${placeholderText}</option>`;
@@ -483,46 +477,34 @@ const catalog = {
       if (window.innerWidth > 600) {
         headerBar.appendChild(inlineDiv);
       } else {
-        topicRow.appendChild(topicLabel);
-        topicRow.appendChild(itemSelect);
+        controls.appendChild(topicLabel);
+        controls.appendChild(itemSelect);
       }
     }
 
-  function resetAll() {
-  viewer.src = '';
-  viewer.style.height = "450px";
-
-  // Reset all selects
-  resetSelect(levelSelect, 'Select Level / Years', false);
-  resetSelect(chapterSelect, 'Select Chapter', true);
-  resetSelect(itemSelect, 'Select Topic / Year', true);
-
-  // Refill Levels so user can pick again
-  fillSelect(levelSelect, getKeys(catalog));
-
-  // Show dropdown controls again
-  controls.classList.remove('hidden');
-
-  // Move topic controls back below
-  topicRow.appendChild(topicLabel);
-  topicRow.appendChild(itemSelect);
-
-  // Remove inline dropdown (if exists)
-  const inline = headerBar.querySelector('.inline-topic');
-  if (inline) inline.remove();
-}
-
+    function resetAll() {
+      viewer.src = '';
+      viewer.style.height = "450px";
+      resetSelect(levelSelect, 'Select Level / Years', false);
+      resetSelect(chapterSelect, 'Select Chapter', true);
+      resetSelect(itemSelect, 'Select Topic / Year', true);
+      fillSelect(levelSelect, getKeys(catalog));
+      controls.classList.remove('hidden');
+      const inline = headerBar.querySelector('.inline-topic');
+      if (inline) inline.remove();
+      controls.appendChild(topicLabel);
+      controls.appendChild(itemSelect);
+    }
 
     window.addEventListener('resize', () => {
       const inline = headerBar.querySelector('.inline-topic');
       if (inline && window.innerWidth <= 600) {
-        topicRow.appendChild(topicLabel);
-        topicRow.appendChild(itemSelect);
+        controls.appendChild(topicLabel);
+        controls.appendChild(itemSelect);
         inline.remove();
       }
     });
 
-    // Fill levels dropdown
     fillSelect(levelSelect, getKeys(catalog));
   </script>
 </body>
